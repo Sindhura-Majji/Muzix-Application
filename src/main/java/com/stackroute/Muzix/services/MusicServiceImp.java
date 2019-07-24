@@ -19,10 +19,11 @@ public class MusicServiceImp implements Musicservice {
         this.muzixRepository = muzixRepository;
     }
 
-    MuzixRepository muzixRepository;
+    private MuzixRepository muzixRepository;
 
     //Method to save track
     public boolean saveTrack(Track track) throws TrackAlreadyExistsException {
+
         if(muzixRepository.existsById(track.getTrackId())){
             throw new TrackAlreadyExistsException("Track Already Exists");
         }
@@ -35,9 +36,9 @@ public class MusicServiceImp implements Musicservice {
 
     //method to delete track
     public boolean deleteTrack(int trackId) {
+
         muzixRepository.deleteById(trackId);
         return true;
-
     }
 
     //method to getAllTracks
@@ -47,8 +48,8 @@ public class MusicServiceImp implements Musicservice {
     }
 
     public Optional<Track> getTrackById(int id){
-       return muzixRepository.findById(id);
 
+       return muzixRepository.findById(id);
     }
 
     //method to UpdateTrack which is already present
@@ -64,6 +65,7 @@ public class MusicServiceImp implements Musicservice {
 
     //Method to get the Track by name
     public List<Track> getByName(String trackName){
+
         List<Track> tracks = muzixRepository.findTitleByName(trackName);
         return tracks;
     }

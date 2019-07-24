@@ -23,7 +23,7 @@ public class Track {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @GeneratedValue(strategy = GenerationType.AUTO)
     private int trackId;
     private String trackName;
     private String trackComment;

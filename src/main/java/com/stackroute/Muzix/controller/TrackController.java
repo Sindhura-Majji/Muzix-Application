@@ -25,16 +25,10 @@ public class TrackController {
 
     //Post mapping to save the track
     @PostMapping("track")
-    public ResponseEntity<?> saveTrack(@RequestBody Track track){
-        ResponseEntity responseEntity;
-        try{
+    public ResponseEntity<?> saveTrack(@RequestBody Track track) throws TrackAlreadyExistsException{
             musicservice.saveTrack(track);
-            responseEntity=new ResponseEntity<String>("successfully Created", HttpStatus.CREATED);
-        }
-        catch (TrackAlreadyExistsException ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
-        }
-        return responseEntity;
+            return new ResponseEntity<String>("successfully Created", HttpStatus.CREATED);
+
     }
 
     //Get mapping to get all the tracks
@@ -47,7 +41,7 @@ public class TrackController {
 
     //Delete mapping to delete the track
     @DeleteMapping("delete/{trackId}")
-    public ResponseEntity<?> deleteTrack(@PathVariable int trackId){
+    public ResponseEntity<?> deleteTrack(@PathVariable int trackId) throws TrackNotFoundException{
         ResponseEntity responseEntity;
         try{
             musicservice.deleteTrack(trackId);
@@ -61,16 +55,10 @@ public class TrackController {
 
     //Put Mapping to update the existing track
     @PutMapping("update/{trackId}")
-    public ResponseEntity<?> updateTrack(@RequestBody Track track,@PathVariable int trackId){
-        ResponseEntity responseEntity;
-        try{
+    public ResponseEntity<?> updateTrack(@RequestBody Track track,@PathVariable int trackId) throws TrackNotFoundException{
+
             musicservice.UpdateTrack(track,trackId);
-            responseEntity =new ResponseEntity<String>("successfully updated", HttpStatus.OK);
-        }
-        catch (TrackNotFoundException ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
-        }
-        return responseEntity;
+             return new ResponseEntity<String>("successfully updated", HttpStatus.OK);
     }
 
     //Get Mapping to get the Track by name
