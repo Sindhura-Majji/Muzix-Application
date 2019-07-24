@@ -1,6 +1,8 @@
 package com.stackroute.Muzix.controller;
 
 import com.stackroute.Muzix.domain.Track;
+import com.stackroute.Muzix.exceptions.TrackAlreadyExistsException;
+import com.stackroute.Muzix.exceptions.TrackNotFoundException;
 import com.stackroute.Muzix.services.Musicservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +31,7 @@ public class TrackController {
             musicservice.saveTrack(track);
             responseEntity=new ResponseEntity<String>("successfully Created", HttpStatus.CREATED);
         }
-        catch (Exception ex){
+        catch (TrackAlreadyExistsException ex){
             responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
@@ -37,9 +39,10 @@ public class TrackController {
 
     //Get mapping to get all the tracks
     @GetMapping("track")
-    public ResponseEntity<?> getAllTracks()
-    {
-        return new ResponseEntity<List<Track>>(musicservice.getAllTracks(),HttpStatus.OK);
+    public ResponseEntity<?> getAllTracks() {
+
+         return new ResponseEntity<List<Track>>(musicservice.getAllTracks(), HttpStatus.OK);
+
     }
 
     //Delete mapping to delete the track
@@ -64,18 +67,18 @@ public class TrackController {
             musicservice.UpdateTrack(track,trackId);
             responseEntity =new ResponseEntity<String>("successfully updated", HttpStatus.OK);
         }
-        catch (Exception ex){
+        catch (TrackNotFoundException ex){
             responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
     }
 
     //Get Mapping to get the Track by name
-    @GetMapping("/names/{trackName}")
-    public ResponseEntity<List<Track>> getByName(@PathVariable String trackName)
-    {
-        List<Track> tracks = musicservice.getByName(trackName);
-        return new ResponseEntity<List<Track>>(tracks,HttpStatus.OK);
+    @GetMapping("names/{trackName}")
+    public ResponseEntity<List<Track>> getByName(@PathVariable String trackName) {
+
+        return new ResponseEntity<List<Track>>(musicservice.getByName(trackName), HttpStatus.OK);
+
     }
 
 }
