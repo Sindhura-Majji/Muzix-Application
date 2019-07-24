@@ -17,4 +17,6 @@ public interface Musicservice {
     public Optional<Track> getTrackById(int trackId);
 
     public boolean UpdateTrack(Track track, int trackId);
+
+    public List<Track> getByName(String name);
 }

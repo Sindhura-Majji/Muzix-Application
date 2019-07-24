@@ -70,4 +70,12 @@ public class TrackController {
         return responseEntity;
     }
 
+    //Get Mapping to get the Track by name
+    @GetMapping("/names/{trackName}")
+    public ResponseEntity<List<Track>> getByName(@PathVariable String trackName)
+    {
+        List<Track> tracks = musicservice.getByName(trackName);
+        return new ResponseEntity<List<Track>>(tracks,HttpStatus.OK);
+    }
+
 }
