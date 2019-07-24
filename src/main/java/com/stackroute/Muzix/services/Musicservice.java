@@ -5,6 +5,7 @@ import com.stackroute.Muzix.domain.Track;
 import java.util.List;
 import java.util.Optional;
 
+//interface for MusicService
 public interface Musicservice {
 
     public boolean saveTrack(Track track);

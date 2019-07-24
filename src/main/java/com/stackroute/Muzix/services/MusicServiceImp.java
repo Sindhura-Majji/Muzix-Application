@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+//This class will implement MusicService and overRide the methods
 @Service
 public class MusicServiceImp implements Musicservice {
 
@@ -18,17 +19,20 @@ public class MusicServiceImp implements Musicservice {
 
     MuzixRepository muzixRepository;
 
+    //Method to save track
     public boolean saveTrack(Track track){
         Track savedTrack=muzixRepository.save(track);
         return true;
     }
 
+    //method to delete track
     public boolean deleteTrack(int trackId){
         muzixRepository.deleteById(trackId);
         return true;
 
     }
 
+    //method to getAllTracks
     public List<Track> getAllTracks(){
         return muzixRepository.findAll();
     }
@@ -38,6 +42,7 @@ public class MusicServiceImp implements Musicservice {
 
     }
 
+    //method to UpdateTrack which is already present
     public boolean UpdateTrack(Track track,int trackId){
         Optional<Track> userOptional = muzixRepository.findById(trackId);
         if (!userOptional.isPresent())

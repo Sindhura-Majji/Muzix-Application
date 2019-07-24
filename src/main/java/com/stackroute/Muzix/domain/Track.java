@@ -2,6 +2,7 @@ package com.stackroute.Muzix.domain;
 
 import javax.persistence.*;
 
+//Track is a pojo class
 @Entity
 public class Track {
 
@@ -11,6 +12,7 @@ public class Track {
         this.trackComment = trackComment;
     }
 
+    //Override the toString method
     @Override
     public String toString() {
         return "Track{" +
@@ -21,11 +23,12 @@ public class Track {
     }
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int trackId;
     private String trackName;
     private String trackComment;
 
+    //Setters and Getters
     public Track() {
     }
 
