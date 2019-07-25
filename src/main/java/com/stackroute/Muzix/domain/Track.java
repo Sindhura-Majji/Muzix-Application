@@ -3,6 +3,7 @@ package com.stackroute.Muzix.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@PropertySource("com.stackroute.resource")
 public class Track {
 
 
