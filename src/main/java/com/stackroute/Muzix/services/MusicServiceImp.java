@@ -5,6 +5,10 @@ import com.stackroute.Muzix.exceptions.TrackAlreadyExistsException;
 import com.stackroute.Muzix.exceptions.TrackNotFoundException;
 import com.stackroute.Muzix.repository.MuzixRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +16,17 @@ import java.util.Optional;
 
 //This class will implement MusicService and overRide the methods
 @Service
-public class MusicServiceImp implements Musicservice {
+public class MusicServiceImp implements Musicservice, ApplicationListener<ContextRefreshedEvent> , CommandLineRunner {
+
+    @Value("${muzix.1.name}")
+    String name1;
+    @Value("${muzix.1.comment}")
+    String comment1;
+    @Value("${muzix.2.name}")
+    String name2;
+    @Value("${muzix.2.comment}")
+    String comment2;
+
 
     @Autowired
     public MusicServiceImp(MuzixRepository muzixRepository) {
@@ -73,4 +87,15 @@ public class MusicServiceImp implements Musicservice {
         return tracks;
     }
 
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        muzixRepository.save(new Track(1,name1,comment1));
+        muzixRepository.save(new Track(2,name2,comment2));
+
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("CommandLineRunner Implemented.");
+    }
 }
