@@ -35,8 +35,11 @@ public class MusicServiceImp implements Musicservice {
     }
 
     //method to delete track
-    public boolean deleteTrack(int trackId) {
-
+    public boolean deleteTrack(int trackId) throws TrackNotFoundException {
+        Track track=new Track();
+        if(!muzixRepository.findById(trackId).isPresent()){
+            throw new TrackNotFoundException("id not found");
+        }
         muzixRepository.deleteById(trackId);
         return true;
     }
@@ -69,4 +72,5 @@ public class MusicServiceImp implements Musicservice {
         List<Track> tracks = muzixRepository.findTitleByName(trackName);
         return tracks;
     }
+
 }
