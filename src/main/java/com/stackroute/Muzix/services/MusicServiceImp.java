@@ -11,12 +11,13 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 //This class will implement MusicService and overRide the methods
 @Service
-public class MusicServiceImp implements Musicservice, ApplicationListener<ContextRefreshedEvent> , CommandLineRunner {
+public class MusicServiceImp implements Musicservice, ApplicationListener<ContextRefreshedEvent>, CommandLineRunner {
 
     @Value("${muzix.1.name}")
     String name1;
@@ -38,11 +39,11 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
     //Method to save track
     public boolean saveTrack(Track track) throws TrackAlreadyExistsException {
 
-        if(muzixRepository.existsById(track.getTrackId())){
+        if (muzixRepository.existsById(track.getTrackId())) {
             throw new TrackAlreadyExistsException("Track Already Exists");
         }
-        Track savedTrack=muzixRepository.save(track);
-        if(savedTrack == null){
+        Track savedTrack = muzixRepository.save(track);
+        if (savedTrack == null) {
             throw new TrackAlreadyExistsException("null values not allowed");
         }
         return true;
@@ -50,12 +51,13 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
 
     //method to delete track
     public boolean deleteTrack(int trackId) throws TrackNotFoundException {
-        Track track=new Track();
-        if(!muzixRepository.findById(trackId).isPresent()){
+
+        if (!muzixRepository.findById(trackId).isPresent()) {
             throw new TrackNotFoundException("id not found");
+        } else {
+            muzixRepository.deleteById(trackId);
+            return true;
         }
-        muzixRepository.deleteById(trackId);
-        return true;
     }
 
     //method to getAllTracks
@@ -64,15 +66,15 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
         return muzixRepository.findAll();
     }
 
-    public Optional<Track> getTrackById(int id){
+    public Optional<Track> getTrackById(int id) {
 
-       return muzixRepository.findById(id);
+        return muzixRepository.findById(id);
     }
 
     //method to UpdateTrack which is already present
-    public boolean UpdateTrack(Track track,int trackId) throws TrackNotFoundException {
+    public boolean UpdateTrack(Track track, int trackId) throws TrackNotFoundException {
         if (muzixRepository.existsById(track.getTrackId())) {
-            Track updatedTrack= muzixRepository.save(track);
+            Track updatedTrack = muzixRepository.save(track);
             return true;
 
         } else {
@@ -81,7 +83,7 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
     }
 
     //Method to get the Track by name
-    public List<Track> getByName(String trackName){
+    public List<Track> getByName(String trackName) {
 
         List<Track> tracks = muzixRepository.findTitleByName(trackName);
         return tracks;
@@ -89,8 +91,8 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        muzixRepository.save(new Track(1,name1,comment1));
-        muzixRepository.save(new Track(2,name2,comment2));
+        muzixRepository.save(new Track(1, name1, comment1));
+        muzixRepository.save(new Track(2, name2, comment2));
 
     }
 
