@@ -1,5 +1,4 @@
 # Muzix-Application
 
-5. Create custom exceptions TrackNotFoundException, TrackAlreadyExistsException in a
-com.stack....exceptions package. Perform appropriate exception handling and propagation
-Back.
+5. Created custom exceptions TrackNotFoundException, TrackAlreadyExistsException in a
+com.stackroute.exceptions package. 
