@@ -87,6 +87,7 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
         return tracks;
     }
 
+    //Overriding ContextRefreshedEvent
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         muzixRepository.save(new Track(1,name1,comment1));
@@ -94,6 +95,7 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
 
     }
 
+    //Overriding CommandLineRunner
     @Override
     public void run(String... args) throws Exception {
         System.out.println("CommandLineRunner Implemented.");
