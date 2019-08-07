@@ -33,7 +33,7 @@ public class MusicServiceImp implements Musicservice {
         return saveTrack;
     }
 
-    //method to delete track
+    //method to delete track based on trackId
     public int deleteTrack(int trackId) {
         muzixRepository.deleteById(trackId);
         return trackId;
