@@ -1,3 +1,3 @@
 # Muzix-Application
 
-1. Completed all the endpoints for CRUD operations on Muzix
+2. Used h2-console to view in-memory data
