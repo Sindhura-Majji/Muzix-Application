@@ -22,7 +22,7 @@ public class MusicServiceImp implements Musicservice {
     MuzixRepository muzixRepository;
 
     //Method to save track
-    public boolean saveTrack(Track track) throws TrackAlreadyExistsException {
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException {
         if(muzixRepository.existsById(track.getTrackId())){
             throw new TrackAlreadyExistsException("Track Already Exists");
         }
@@ -30,13 +30,13 @@ public class MusicServiceImp implements Musicservice {
         if(savedTrack == null){
             throw new TrackAlreadyExistsException("null values not allowed");
         }
-        return true;
+        return saveTrack;
     }
 
     //method to delete track
-    public boolean deleteTrack(int trackId) {
+    public int deleteTrack(int trackId) {
         muzixRepository.deleteById(trackId);
-        return true;
+        return trackId;
 
     }
 
@@ -52,10 +52,10 @@ public class MusicServiceImp implements Musicservice {
     }
 
     //method to UpdateTrack which is already present
-    public boolean UpdateTrack(Track track,int trackId) throws TrackNotFoundException {
+    public Track UpdateTrack(Track track,int trackId) throws TrackNotFoundException {
         if (muzixRepository.existsById(track.getTrackId())) {
             Track updatedTrack= muzixRepository.save(track);
-            return true;
+            return updatedTrack;
 
         } else {
             throw new TrackNotFoundException("Track you are searching is not found!!!");
