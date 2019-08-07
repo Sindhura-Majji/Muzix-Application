@@ -48,4 +48,10 @@ public class MusicServiceImpl implements Musicservice {
         muzixRepository.save(track);
         return track;
     }
+
+    //Method to get the Track by name
+    public List<Track> getByName(String trackName){
+        List<Track> tracks = muzixRepository.findTitleByName(trackName);
+        return tracks;
+    }
 }
