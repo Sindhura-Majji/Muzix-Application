@@ -36,7 +36,7 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
     private MuzixRepository muzixRepository;
 
     //Method to save track
-    public boolean saveTrack(Track track) throws TrackAlreadyExistsException {
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException {
 
         if(muzixRepository.existsById(track.getTrackId())){
             throw new TrackAlreadyExistsException("Track Already Exists");
@@ -45,17 +45,17 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
         if(savedTrack == null){
             throw new TrackAlreadyExistsException("null values not allowed");
         }
-        return true;
+        return savedTrack;
     }
 
     //method to delete track
-    public boolean deleteTrack(int trackId) throws TrackNotFoundException {
+    public int deleteTrack(int trackId) throws TrackNotFoundException {
         Track track=new Track();
         if(!muzixRepository.findById(trackId).isPresent()){
             throw new TrackNotFoundException("id not found");
         }
         muzixRepository.deleteById(trackId);
-        return true;
+        return trackId;
     }
 
     //method to getAllTracks
@@ -70,10 +70,10 @@ public class MusicServiceImp implements Musicservice, ApplicationListener<Contex
     }
 
     //method to UpdateTrack which is already present
-    public boolean UpdateTrack(Track track,int trackId) throws TrackNotFoundException {
+    public Track UpdateTrack(Track track,int trackId) throws TrackNotFoundException {
         if (muzixRepository.existsById(track.getTrackId())) {
             Track updatedTrack= muzixRepository.save(track);
-            return true;
+            return updatedTrack;
 
         } else {
             throw new TrackNotFoundException("Track you are searching is not found!!!");
