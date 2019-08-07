@@ -1,7 +1,7 @@
-package com.stackroute.Muzix.controller;
+package com.stackroute.muzix.controller;
 
-import com.stackroute.Muzix.domain.Track;
-import com.stackroute.Muzix.services.Musicservice;
+import com.stackroute.muzix.domain.Track;
+import com.stackroute.muzix.services.Musicservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +21,7 @@ public class TrackController {
         this.musicservice = musicservice;
     }
 
+    //saveTrack
     @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track){
         ResponseEntity responseEntity;
@@ -34,12 +35,14 @@ public class TrackController {
         return responseEntity;
     }
 
+    //Get all the tracks in the database
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks()
     {
         return new ResponseEntity<List<Track>>(musicservice.getAllTracks(),HttpStatus.OK);
     }
 
+    //Delete the track based on trackId
     @DeleteMapping("delete/{trackId}")
     public ResponseEntity<?> deleteTrack(@PathVariable int trackId){
         ResponseEntity responseEntity;
@@ -53,6 +56,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //update the track based on trackId
     @PutMapping("update/{trackId}")
     public ResponseEntity<?> updateTrack(@RequestBody Track track,@PathVariable int trackId){
         ResponseEntity responseEntity;

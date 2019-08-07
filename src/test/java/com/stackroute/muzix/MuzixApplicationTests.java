@@ -1,4 +1,4 @@
-package com.stackroute.Muzix;
+package com.stackroute.muzix;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

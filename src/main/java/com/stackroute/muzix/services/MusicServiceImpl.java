@@ -1,7 +1,7 @@
-package com.stackroute.Muzix.services;
+package com.stackroute.muzix.services;
 
-import com.stackroute.Muzix.domain.Track;
-import com.stackroute.Muzix.repository.MuzixRepository;
+import com.stackroute.muzix.domain.Track;
+import com.stackroute.muzix.repository.MuzixRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,40 +9,43 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MusicServiceImp implements Musicservice {
+public class MusicServiceImpl implements Musicservice {
 
     @Autowired
-    public MusicServiceImp(MuzixRepository muzixRepository) {
+    public MusicServiceImpl(MuzixRepository muzixRepository) {
         this.muzixRepository = muzixRepository;
     }
 
     MuzixRepository muzixRepository;
 
-    public boolean saveTrack(Track track){
+    //Saves the track
+    public Track saveTrack(Track track){
         Track savedTrack=muzixRepository.save(track);
-        return true;
+        return savedTrack;
     }
 
-    public boolean deleteTrack(int trackId){
+    //Delete the track based on trackId
+    public int deleteTrack(int trackId){
         muzixRepository.deleteById(trackId);
-        return true;
-
+        return trackId;
     }
 
+    //Gets all the track saved in the database
     public List<Track> getAllTracks(){
         return muzixRepository.findAll();
     }
 
+    //Gets the specified track based on the trackId
     public Optional<Track> getTrackById(int id){
        return muzixRepository.findById(id);
-
     }
 
-    public boolean UpdateTrack(Track track,int trackId){
+    //Updates the track based on trackId
+    public Track UpdateTrack(Track track,int trackId){
         Optional<Track> userOptional = muzixRepository.findById(trackId);
         if (!userOptional.isPresent())
-            return false;
+            return track;
         muzixRepository.save(track);
-        return true;
+        return track;
     }
 }
