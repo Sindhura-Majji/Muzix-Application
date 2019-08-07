@@ -21,7 +21,7 @@ public class TrackController {
         this.musicservice = musicservice;
     }
 
-    //saveTrack
+    //Post mapping to save the track
     @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track){
         ResponseEntity responseEntity;
@@ -35,14 +35,14 @@ public class TrackController {
         return responseEntity;
     }
 
-    //Get all the tracks in the database
+    //Get mapping to get all the tracks
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks()
     {
         return new ResponseEntity<List<Track>>(musicservice.getAllTracks(),HttpStatus.OK);
     }
 
-    //Delete the track based on trackId
+    //Delete mapping to delete the track
     @DeleteMapping("delete/{trackId}")
     public ResponseEntity<?> deleteTrack(@PathVariable int trackId){
         ResponseEntity responseEntity;
@@ -56,7 +56,7 @@ public class TrackController {
         return responseEntity;
     }
 
-    //update the track based on trackId
+    //Put Mapping to update the existing track based on trackId
     @PutMapping("update/{trackId}")
     public ResponseEntity<?> updateTrack(@RequestBody Track track,@PathVariable int trackId){
         ResponseEntity responseEntity;
