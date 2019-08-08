@@ -26,6 +26,7 @@ public class TrackController {
         this.trackService = trackService;
     }
 
+    //Post mapping to save the track
     @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
         ResponseEntity responseEntity;
@@ -49,12 +50,14 @@ public class TrackController {
         return new ResponseEntity<List<Track>>(savedTrackList, HttpStatus.CREATED);
     }
 
+    //Get Mapping to get the Track by name
     @GetMapping("trackByName")
     public ResponseEntity<?> getTrackByName(@RequestParam String name) throws TrackNotFoundException
     {
         return new ResponseEntity<List<Track>>(trackService.getTracksByName(name), HttpStatus.OK);
     }
 
+    //Get mapping to get all the tracks
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
         ResponseEntity responseEntity;
@@ -70,6 +73,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //Put Mapping to update the existing track based on trackId
     @PutMapping("track/{id}")
     public ResponseEntity<?> updateTrack(@RequestBody Track track, @PathVariable int id) {
         ResponseEntity responseEntity;
@@ -82,6 +86,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //Delete mapping to delete the track
     @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteTrack(@PathVariable int id) {
         ResponseEntity responseEntity;
@@ -94,6 +99,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //GetMapping to searchTrack
     @GetMapping("searchTracks")
     public ResponseEntity<?> searchTracks(@RequestParam("searchString") String searchString)
     {
@@ -107,6 +113,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //GetMapping to getLastFmTracks
     @GetMapping("getLastFmTracks")
     public ResponseEntity<?> getLastFmTracks(@RequestParam String url) throws Exception{
         RestTemplate restTemplate = new RestTemplate();
