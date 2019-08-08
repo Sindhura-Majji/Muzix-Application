@@ -1,3 +1,3 @@
 # Muzix-Application
 
-7.Global exception using Controller advice
+7.Performed global exception using Controller advice
