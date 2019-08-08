@@ -26,6 +26,7 @@ public class TrackController {
         this.trackService = trackService;
     }
 
+    //PostMapping for save track
     @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
         ResponseEntity responseEntity;
@@ -65,6 +66,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //PutMapping forupdate track
     @PutMapping("track/{id}")
     public ResponseEntity<?> updateTrack(@RequestBody Track track, @PathVariable int id) {
         ResponseEntity responseEntity;
@@ -77,6 +79,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //DeleteMapping for delete track based on id
     @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteTrack(@PathVariable int id) {
         ResponseEntity responseEntity;
@@ -89,7 +92,7 @@ public class TrackController {
         return responseEntity;
     }
 
-
+    //GetMapping to get last fm tracks
     @GetMapping("getLastFmTracks")
     public ResponseEntity<?> getLastFmTracks(@RequestParam String url) throws Exception{
         RestTemplate restTemplate = new RestTemplate();
