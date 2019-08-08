@@ -1,6 +1,6 @@
 # Muzix-Application
 
-8.Remove all hard coded data from the application code to application.properties
+8.Removed all hard coded data from the application code to application.properties
 a)by using @Value.
 b)by using @PropertySource
 c)by using Environment
