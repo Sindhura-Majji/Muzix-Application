@@ -10,15 +10,15 @@ import java.util.Optional;
 //interface for MusicService
 public interface Musicservice {
 
-    public boolean saveTrack(Track track) throws TrackAlreadyExistsException;
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException;
 
-    public boolean deleteTrack(int trackId) throws TrackNotFoundException;
+    public int deleteTrack(int trackId) throws TrackNotFoundException;
 
     public List<Track> getAllTracks();
 
     public Optional<Track> getTrackById(int trackId) ;
 
-    public boolean UpdateTrack(Track track, int trackId) throws TrackNotFoundException;
+    public Track UpdateTrack(Track track, int trackId) throws TrackNotFoundException;
 
     public List<Track> getByName(String name);
 }
